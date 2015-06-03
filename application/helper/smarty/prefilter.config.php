@@ -12,11 +12,11 @@
  */
 function smarty_prefilter_config($source, $smarty)
 {
-	$source = $smarty->smarty->applyViewPlugins($smarty->template_resource, $source);
+	if ($smarty!=null) $source = $smarty->smarty->applyViewPlugins($smarty->template_resource, $source);
 
-	// AngularJS variables
-	$source = str_replace('{{', '{literal}{{', $source);
-	$source = str_replace('}}', '}}{/literal}', $source);
+	// AngularJS variables and functions
+    //finds {{obj.x}} or {{func(x)}} and adds {literal}{/literal} around it. If there is already does not add another set of 'literal' tags.
+    $source = preg_replace('/(({literal})*)({{[\w\.\(\)\w]*}})(({\/literal})*)/', '{literal}$3{/literal}', $source);
 
 	// remove comments
 	$source = preg_replace('/\{\*(.*)\*\}/msU', '', $source);

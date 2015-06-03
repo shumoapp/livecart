@@ -75,8 +75,8 @@ class Product extends MultilingualObject
 		$schema->registerField(new ARForeignKeyField("taxClassID", "TaxClass", "ID", null, ARInteger::instance()));
 
 		$schema->registerField(new ARField("isEnabled", ARBool::instance()));
-		$schema->registerField(new ARField("sku", ARVarchar::instance(20)))->validate('required', 'IsUniqueSkuCheck');
-		$schema->registerField(new ARField("name", ARArray::instance()))->validate('required');
+		$schema->registerField(new ARField("sku", ARVarchar::instance(20)));
+		$schema->registerField(new ARField("name", ARArray::instance()));
 		$schema->registerField(new ARField("shortDescription", ARArray::instance()));
 		$schema->registerField(new ARField("longDescription", ARArray::instance()));
 		$schema->registerField(new ARField("keywords", ARText::instance()));

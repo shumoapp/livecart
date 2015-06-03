@@ -3,7 +3,10 @@
 /public/cache
 public/upload
 /public/module
-/storage
+/storage/*
+!/storage/configuration
+/storage/configuration/*
+!/storage/configuration/settings.php
 /test/report
 doc/db/alter.sql
 doc/db/drop.sql

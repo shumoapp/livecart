@@ -51,5 +51,29 @@ class PrefilterTest extends LiveCartTest
 
 		$this->assertEqual($replaced, $code);
 	}
+
+    /**
+     * Testing for AngularJS vars
+     */
+    public function testAngularJSVars()
+    {
+        $code = '{{product.name}}';
+        $replaced = smarty_prefilter_config($code,  null);
+
+        $this->assertEqual($replaced, '{literal}{{product.name}}{/literal}');
+    }
+
+    /**
+     * Testing for structures that look like AngularJS vars
+     */
+    public function testNonAngularJSVars()
+    {
+        $code = "{{capture assign=blockAsParamValue}{id: category.id}{/capture}";
+        $replaced = smarty_prefilter_config($code,  null);
+
+        $this->assertEqual($code, $replaced);
+    }
+
+
 }
 ?>

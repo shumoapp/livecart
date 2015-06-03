@@ -6,7 +6,8 @@
  * @author Integry Systems
  */
 
-error_reporting(E_ALL);
+//error_reporting(E_ALL);
+error_reporting(E_ALL & ~E_DEPRECATED & ~E_STRICT);
 
 if (!defined('TEST_INITIALIZED'))
 {
@@ -22,14 +23,12 @@ if (!defined('TEST_INITIALIZED'))
 
 	$arPath = realpath(getcwd() . DIRECTORY_SEPARATOR . 'library' . DIRECTORY_SEPARATOR . 'activerecord' . DIRECTORY_SEPARATOR . 'ActiveRecord.php');
 	include_once($arPath);
-	ActiveRecord::setDSN('mysql://root@server/livecart');
+	ActiveRecord::setDSN('mysql://testerer@localhost/livecart');
 
 	// set unittest and simpletest library root directory
 	$libDir = dirname(dirname(__FILE__)) . '/_library/';
-	ClassLoader::mountPath('phpunit', realpath($libDir . 'phpunit/'));
 	ClassLoader::mountPath('unittest', realpath($libDir . 'unittest') . '/');
 	ClassLoader::mountPath('testdir', dirname(__FILE__).'/');
-	ClassLoader::import("phpunit.*");
 	ClassLoader::import("unittest.*");
 	ClassLoader::import("testdir.*");
 
