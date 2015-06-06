@@ -82,8 +82,9 @@ class SearchableConfigurationIndexing
 		{
 			$tree = $this->config->getTree();
 		}
-		foreach($tree as $sectionID=>&$node)
+		foreach($tree as &$node)
 		{
+            $sectionID = $node['id'];
 			if($id==null || $sectionID == $id)
 			{
 				$sectionTitle = $this->config->getSectionTitle($sectionID);
@@ -135,9 +136,9 @@ class SearchableConfigurationIndexing
 				}
 			}
 			
-			if(array_key_exists('subs', $node))
+			if(array_key_exists('children', $node))
 			{
-				$node['subs'] = $this->buildList($node['subs'], $id);
+				$node['children'] = $this->buildList($node['children'], $id);
 			}
 			// translating to all languages makes list *very* long
 			// add by one section.
